@@ -1,0 +1,65 @@
+﻿@using DOAN.Models;
+@model List<TbCtphong>
+
+<div class="page-wrapper">
+    <div class="content container-fluid">   
+        <div class="page-header">
+            <div class="row align-items-center">
+                <h1 class="main-title">Danh Sách Các Phòng</h1>
+                <div class="col">
+                    
+                        <div class="top-nav-search">
+                            <form>
+                                <input type="text" class="form-control" placeholder="Tìm Kiếm">
+                                <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="room-container">
+            <div class="room-list">
+                <!-- Thêm các phòng ở đây -->
+                @foreach (var ph in Model)
+                {
+                if(@ph.TrangThai == true)
+                {
+                        <div class="room occupied" id="">
+                        <h2>@ph.TenPhong</h2>
+
+                        <p>Số giường: @ph.SoGiuong</p>
+                        <p>Loại giường: @ph.LoaiGiuong</p>
+                        <p>Loại phòng: @ph.LoaiPhong</p>
+                        <p>Giá: $@ph.GiaCt/đêm</p>
+                        <p>Trạng thái: Đã đặt</p>
+                        <button>
+                                <a href="@Url.Action("ChiTiet", "Phong", new { idPhong = ph.IdPhong })" class="text-dark">
+                                Xem Chi Tiết
+                            </a>
+                        </button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="room" id="">
+                            <h2>@ph.TenPhong</h2>
+
+                            <p>Số giường: @ph.SoGiuong</p>
+                            <p>Loại giường: @ph.LoaiGiuong</p>
+                            <p>Loại phòng: @ph.LoaiPhong</p>
+                            <p>Giá: $@ph.GiaCt/đêm</p>
+                            <p>Trạng thái: Phòng trống</p>
+                            <button>
+                                <a href="@Url.Action("CreatePDK", "Phong", new { idPhong = ph.IdPhong })" class="text-dark">
+                                    Đặt Phòng
+                                </a>
+                            </button>
+                        </div>
+                    }
+                
+                }
+            </div>
+        </div>
+    </div>
+</div>

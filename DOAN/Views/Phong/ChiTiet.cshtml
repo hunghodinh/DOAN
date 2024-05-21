@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DOAN.Models.TbCtphieuDangKy>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="row">
+             <div class="col-sm-12">
+                <div class="card-header">
+                    <h4 class="card-title">Chi Tiết Phiếu Đăng Ký</h4>
+                </div>
+                <div class="card card-table">
+                    <div class="card-body booking_card">
+                        <div class="table-responsive">
+                            <table class="table table-bordered mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ID Khách Hàng</th>
+                                        <th>ID Phòng</th>
+                                        <th>Số Lượng Người Lớn</th>
+                                        <th>Số Lượng Trẻ Em</th>
+                                        <th>Ngày Đến</th>
+                                        <th>Ngày Đi</th>
+                                        <th>Tổng Số Ngày Ở</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var ct in Model)
+                                    {
+                                        <tr>
+                                            <td>@ct.IdKh</td>
+                                            <td>@ct.IdPhong</td>
+                                            <td>@ct.SoNguoiLon</td>
+                                            <td>@ct.SoTreEm</td>
+                                            <td>@((ct.NgayDen != null) ? ((DateTime)ct.NgayDen).ToString("dd/MM/yyyy") : "")</td>
+                                            <td>@((ct.NgayDi != null) ? ((DateTime)ct.NgayDi).ToString("dd/MM/yyyy") : "")</td>
+                                            <td>@ct.TongNgayO</td>
+                                            <td class="text-right">
+                                                <div class="dropdown dropdown-action">
+                                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" asp-action="Edit" asp-route-id="@ct.IdCtpdk"><i class="fas fa-pencil-alt m-r-5"></i>Sửa</a>
+
+
+                                                        <a class="dropdown-item delete-action" data-toggle="modal" data-target="#deleteModal-@ct.IdCtpdk"><i class="fas fa-trash-alt m-r-5"></i> Xóa</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+        @foreach (var ct in Model)
+        {
+            <div class="modal fade delete-modal" id="deleteModal-@ct.IdCtpdk" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                            <h3 class="delete_class">Bạn chắc chắn muốn xóa không?</h3>
+                            <div class="m-t-20">
+                                <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                                <form asp-action="Delete" asp-route-id="@ct.IdCtpdk">
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <a class="btn btn-lg btn-warning p-2" href="/Phong/Index">Quay lại</a>
+    </div>
+</div>
+
+                            

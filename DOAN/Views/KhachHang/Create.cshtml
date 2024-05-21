@@ -1,0 +1,94 @@
+﻿﻿@using DOAN.Utilities;
+@model DOAN.Models.TbKhachHang;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title mt-5">Chỉnh sửa khách hàng </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form method="post">
+                    <div class="row formtype">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="IdKh">ID Khách Hàng</label>
+                                <input type="text" class="form-control mb-3" asp-for="IdKh" placeholder="KH">
+                                <span asp-validation-for="IdKh" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="TenKh">Tên Khách Hàng</label>
+                                <input type="text" class="form-control mb-3" asp-for="TenKh" placeholder="">
+                                <span asp-validation-for="TenKh" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="NgaySinh">Ngày Sinh</label>
+                                <div class="cal-icon">
+                                    <input id="datetimepicker3" type="text" class="form-control datetimepicker" asp-for="NgaySinh" placeholder="">
+                                </div>
+                                <span asp-validation-for="NgaySinh" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="GioTinh">Giới Tính</label>
+                                <input type="text" class="form-control mb-3" asp-for="GioTinh" placeholder="">
+                                <span asp-validation-for="GioTinh" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="DienThoai">Số Điện thoại</label>
+                                <input type="text" class="form-control mb-3" asp-for="DienThoai" placeholder="">
+                                <span asp-validation-for="DienThoai" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="DiaChi">Địa Chỉ</label>
+                                <input type="text" class="form-control mb-3" asp-for="DiaChi" placeholder="">
+                                <span asp-validation-for="DiaChi" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="SoCccd">Căn cước công dân </label>
+                                <input type="text" class="form-control mb-3" asp-for="SoCccd" placeholder="">
+                                <span asp-validation-for="SoCccd" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Email">Email</label>
+                                <input type="text" class="form-control mb-3" asp-for="Email" placeholder="">
+                                <span asp-validation-for="Email" class="alert-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary buttonedit">Lưu</button>
+                    <a asp-controller="KhachHang" asp-action="Index" class="btn btn-lg btn-warning p-2">Quay lại</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#datetimepicker3').datetimepicker({
+            format: 'LT'
+        });
+    });
+</script>

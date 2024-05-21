@@ -1,0 +1,95 @@
+﻿@using DOAN.Models;
+@model IList<TbKhachHang>
+
+<div class="page-wrapper">
+	<div class="content container-fluid">
+		<div class="page-header">
+			<div class="row align-items-center">
+				<div class="col">
+					<div class="mt-5">
+						<div class="top-nav-search">
+							<form>
+								<input type="text" class="form-control" placeholder="Tìm Kiếm">
+								<button class="btn" type="submit"><i class="fas fa-search"></i></button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card card-table">
+					<div class="card-body booking_card">
+						<div class="table-responsive">
+							<table class="datatable table table-stripped table table-hover table-center mb-0">
+								<thead>
+									<tr>
+										<th>ID Khách Hàng</th>
+										<th>Họ Tên</th>
+										<th>Ngày sinh</th>
+										<th>Giới tính</th>
+										<th>Điện thoại</th>
+										<th>Số CCCD</th>
+										<th>Địa chỉ</th>
+										<th>Email</th>
+										<th>Hành động</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach(var kh in Model)
+									{
+										<tr>
+											<td>@kh.IdKh</td>
+											<td>@kh.TenKh</td>
+											<td>@((kh.NgaySinh != null) ? ((DateTime)kh.NgaySinh).ToString("dd/MM/yyyy") : "")</td>
+											<td>@kh.GioTinh</td>
+											<td>@kh.DienThoai</td>
+											<td>@kh.SoCccd</td>
+											<td>@kh.DiaChi</td>
+											<td>@kh.Email</td>
+											<td class="text-right">
+												<div class="dropdown dropdown-action">
+													<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v ellipse_color"></i></a>
+													<div class="dropdown-menu dropdown-menu-right">
+														<a class="dropdown-item" asp-action="Edit" asp-route-id="@kh.IdKh"><i class="fas fa-pencil-alt m-r-5"></i>Sửa</a>
+
+														
+														<a class="dropdown-item delete-action" data-toggle="modal" data-target="#deleteModal-@kh.IdKh"><i class="fas fa-trash-alt m-r-5"></i> Xóa</a>
+													</div>
+												</div>
+											</td>
+										</tr>
+									}
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		@foreach(var kh in Model)
+		{
+			<div class="modal fade delete-modal" id="deleteModal-@kh.IdKh" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-body text-center">
+							<img src="~/assets/img/sent.png" alt="" width="50" height="46">
+							<h3 class="delete_class">Bạn chắc chắn muốn xóa không?</h3>
+							<div class="m-t-20">
+								<a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+								<form asp-action="Delete" asp-route-id="@kh.IdKh">
+									<button type="submit" class="btn btn-danger">Xóa</button>
+								</form>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+
