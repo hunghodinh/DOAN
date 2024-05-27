@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using DOAN.Utilities;
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,14 +23,14 @@
 	<div class="main-wrapper">
 		<div class="header">
 			<div class="header-left">
-				<a href="index.html" class="logo"> <img src="~/assets/img/hotel_logo.png" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL</span> </a>
+				<a href="index.html" class="logo"> <img src="~/assets/img/123.png" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL</span> </a>
 				<a href="index.html" class="logo logo-small"> <img src="~/assets/img/hotel_logo.png" alt="Logo" width="30" height="30"> </a>
 			</div>
 			<a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
 			<a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
 			<ul class="nav user-menu">
 				<li class="nav-item dropdown noti-dropdown">
-					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <i class="fe fe-bell"></i> <span class="badge badge-pill">3</span> </a>
+					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <i class="fe fe-bell"></i> <span class="badge badge-pill"></span> </a>
 					<div class="dropdown-menu notifications">
 						<div class="topnav-dropdown-header"> <span class="notification-title">Notifications</span> <a href="javascript:void(0)" class="clear-noti"> Clear All </a> </div>
 						<div class="noti-content">
@@ -109,15 +111,15 @@
 					</div>
 				</li>
 				<li class="nav-item dropdown has-arrow">
-					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img class="rounded-circle" src="~/assets/img/profiles/avatar-01.jpg" width="31" alt="Soeng Souy"></span> </a>
+					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img class="rounded-circle" src="~/assets/img/tải xuống.png" width="31" alt="Soeng Souy"></span> </a>
 					<div class="dropdown-menu">
 						<div class="user-header">
-							<div class="avatar avatar-sm"> <img src="~/assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle"> </div>
+							<div class="avatar avatar-sm"> <img src="~/assets/img/tải xuống.png" alt="User Image" class="avatar-img rounded-circle"> </div>
 							<div class="user-text">
-								<h6>Soeng Souy</h6>
-								<p class="text-muted mb-0">Administrator</p>
+								<h6>@Functions._Username</h6>
+								<p class="text-muted mb-0">Admin</p>
 							</div>
-						</div> <a class="dropdown-item" href="profile.html">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" href="login.html">Logout</a>
+						</div> <a class="dropdown-item" href="">Thông tin tài khoản</a> <a class="dropdown-item" href="/Home/Logout">Logout</a>
 					</div>
 				</li>
 			</ul>
@@ -148,6 +150,8 @@
 							<ul class="submenu_class" style="display: none;">
 								<li><a href="/NhanVien/Index">Tất cả nhân viên </a></li>
 								<li><a href="/NhanVien/Create"> Thêm mới nhân viên </a></li>
+								<li><a href="/NhanVien/DanhSach"> Tài khoản nhân viên </a></li>
+								<li><a href="/NhanVien/CreateTK"> Thêm mới tài khoản </a></li>
 							</ul>
 						</li>
 						

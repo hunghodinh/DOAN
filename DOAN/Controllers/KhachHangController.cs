@@ -1,4 +1,5 @@
 ﻿using DOAN.Models;
+using DOAN.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -13,7 +14,9 @@ namespace DOAN.Controllers
 		}
 		public IActionResult Index()
 		{
-			var mn = _context.TbKhachHangs.OrderBy(m=>m.IdKh).ToList();
+            if (!Functions.IsLogin())
+                return RedirectToAction("Index", "DangNhap");
+            var mn = _context.TbKhachHangs.OrderBy(m=>m.IdKh).ToList();
 			return View(mn);
 		}
 		public IActionResult Delete(string? id)

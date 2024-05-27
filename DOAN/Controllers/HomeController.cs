@@ -1,4 +1,5 @@
 ﻿using DOAN.Models;
+using DOAN.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -15,11 +16,8 @@ namespace DOAN.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
-		}
-
-		public IActionResult Privacy()
-		{
+			if (!Functions.IsLogin())
+				return RedirectToAction("Index", "DangNhap");
 			return View();
 		}
 
@@ -28,6 +26,15 @@ namespace DOAN.Controllers
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
+        public IActionResult Logout()
+        {
+            // Xóa thông tin đăng nhập
+            Functions._AccountId = string.Empty;
+            Functions._Username = string.Empty;
+            Functions._Message = string.Empty;
 
-	}
+            // Chuyển hướng tới trang đăng nhập
+            return RedirectToAction("Index", "DangNhap");
+        }
+    }
 }

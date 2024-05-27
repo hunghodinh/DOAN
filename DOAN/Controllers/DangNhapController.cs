@@ -12,28 +12,44 @@ namespace DOAN.Controllers
         {
             _context = context;
         }
+
+        // Phương thức Index hiển thị trang đăng nhập
         public IActionResult Index()
         {
             return View();
         }
+
+        // Phương thức xử lý đăng nhập
+        [HttpPost]
         public IActionResult Index(TbTaiKhoan user)
         {
             if (user == null)
             {
-                return NotFound();
+                Functions._Message = "Dữ liệu người dùng bị thiếu.";
+                return View(user);
+            }
+            var mn = _context.TbTaiKhoans.FirstOrDefault();
+            // Kiểm tra trạng thái của tài khoản
+            if ( mn.TrangThai == false)
+            {
+                Functions._Message = "Tài khoản không hoạt động!";
+                return View(user);
             }
             string pw = Functions.MD5Password(user.MatKhau);
-            var check = _context.TbTaiKhoans.Where(m => (m.TenDangNhap == user.TenDangNhap) && (m.MatKhau == pw)).FirstOrDefault();
+            var check = _context.TbTaiKhoans.FirstOrDefault(m => m.TenDangNhap == user.TenDangNhap && m.MatKhau == pw);
 
             if (check == null)
             {
-                Functions._Message = "Invalid UserName or Password!";
-                return RedirectToAction("Index", "Login");
+                Functions._Message = "Sai username hoặc password!";
+                return View(user);
             }
+            
             Functions._Message = string.Empty;
-            Functions._AccountId = check.IdNguoiDung;
+            Functions._AccountId = check.IdNguoiDung.ToString();
             Functions._Username = string.IsNullOrEmpty(check.TenDangNhap) ? string.Empty : check.TenDangNhap;
             return RedirectToAction("Index", "Home");
         }
+        
+
     }
 }

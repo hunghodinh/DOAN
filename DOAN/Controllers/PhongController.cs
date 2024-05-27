@@ -1,4 +1,5 @@
 ﻿using DOAN.Models;
+using DOAN.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -15,6 +16,8 @@ namespace DOAN.Controllers
 
         public IActionResult Index()
         {
+            if (!Functions.IsLogin())
+                return RedirectToAction("Index", "DangNhap");
             var mn = _context.TbCtphongs.OrderBy(m => m.IdPhong).ToList();
             return View(mn);
         }
@@ -88,28 +91,22 @@ namespace DOAN.Controllers
             return View(phieuDangKy);
         }
 
-        public IActionResult Edit(string? id)
+        public IActionResult Edit(int? id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (id == null)
             {
                 return NotFound();
             }
 
-            // Lấy thông tin phòng từ cơ sở dữ liệu
-            var phong = _context.TbCtphongs.FirstOrDefault(p => p.IdPhong == id);
-            if (phong == null)
+            var po = _context.TbCtphieuDangKies.Find(id);
+            if (po == null)
             {
                 return NotFound();
             }
 
-            // Khởi tạo một đối tượng TbCtphieuDangKy với IdPhong đã được thiết lập
-            var newPhieuDangKy = new TbCtphieuDangKy
-            {
-                IdPhong = id
-            };
-
-
-            return View(newPhieuDangKy);
+            var polist = _context.TbCtphieuDangKies.OrderBy(m => m.IdCtpdk).ToList();
+            ViewBag.poList = polist;
+            return View(po);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

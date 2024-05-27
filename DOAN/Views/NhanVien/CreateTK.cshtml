@@ -1,0 +1,64 @@
+﻿﻿@using DOAN.Utilities;
+@model DOAN.Models.TbTaiKhoan;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title mt-5">Chỉnh sửa tài khoản nhân viên</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form method="post">
+                    <div class="row formtype">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="IdNguoiDung">ID</label>
+                                <input type="text" class="form-control mb-3" asp-for="IdNguoiDung" placeholder="ND__">
+                                <span asp-validation-for="IdNguoiDung" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="IdNv">ID nhân viên</label>
+                                <input type="text" class="form-control mb-3" asp-for="IdNv" placeholder="NV__">
+                                <span asp-validation-for="IdNv" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="TenDangNhap">Tên đăng nhập </label>
+                                <input type="text" class="form-control mb-3" asp-for="TenDangNhap">
+                                <span asp-validation-for="TenDangNhap" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="MatKhau">Mật khẩu</label>
+                                <input type="password" class="form-control mb-3" asp-for="MatKhau">
+                                <span asp-validation-for="MatKhau" class="alert-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="TrangThai">Trạng thái</label>
+                                <input type="text" class="form-control mb-3" asp-for="TrangThai">
+                                <span asp-validation-for="TrangThai" class="alert-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary buttonedit">Lưu</button>
+                    <a asp-controller="NhanVien" asp-action="DanhSach" class="btn btn-lg btn-warning p-2">Quay lại</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

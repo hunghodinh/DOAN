@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DOAN.Models;
+using DOAN.Utilities;
 
 namespace DOAN.Controllers
 {
@@ -20,8 +21,11 @@ namespace DOAN.Controllers
 
 		[HttpGet]
 		public async Task<IActionResult> GetRoomSummary()
+
 		{
-			var totalBookings = await _context.TbCtphongs.SelectMany(p => p.TbCtphieuDangKies).CountAsync();
+            if (!Functions.IsLogin())
+                return RedirectToAction("Index", "DangNhap");
+            var totalBookings = await _context.TbCtphongs.SelectMany(p => p.TbCtphieuDangKies).CountAsync();
 			var availableRooms = await _context.TbCtphongs.CountAsync(p => p.TrangThai == false);
 
 			var summary = new RoomSummaryDto
